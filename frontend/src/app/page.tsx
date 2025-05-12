@@ -2,8 +2,10 @@ import Chips from "./components/chips/Chips";
 import GoogleSearchBar from "./components/GoogleSearchBar/GoogleSearchBar";
 import Otp from "./components/Otp/page";
 import Practice from "./components/practice/Practice";
+import Progress from "./components/Progress/Progress";
 import Sidebar from "./components/sidebar/Sidebar";
 import Tabs from "./components/Tabs/Tabs";
+import Todo from "./components/Todo/Todo";
 
 export default function Home() {
   return (
@@ -12,7 +14,9 @@ export default function Home() {
       <GoogleSearchBar/> */}
        {/* <Otp/> */}
        {/* <Chips/> */}
-       <Practice/>
+       {/* <Practice/> */}
+       {/* <Todo/> */}
+       <Progress/>
     </div>
   );
 }
