@@ -1,6 +1,7 @@
 import Chips from "./components/chips/Chips";
 import GoogleSearchBar from "./components/GoogleSearchBar/GoogleSearchBar";
 import Otp from "./components/Otp/page";
+import Pagination from "./components/pagination/Pagination";
 import Practice from "./components/practice/Practice";
 import Progress from "./components/Progress/Progress";
 import Sidebar from "./components/sidebar/Sidebar";
@@ -16,7 +17,8 @@ export default function Home() {
        {/* <Chips/> */}
        {/* <Practice/> */}
        {/* <Todo/> */}
-       <Progress/>
+       {/* <Progress/> */}
+       <Pagination/>
     </div>
   );
 }
