@@ -1,22 +1,28 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 const Pagination = () => {
-
   const [product, setProduct] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    const data = await fetch("https://dummyjson.com/products?limit=500");
-    const json = await data.json();
-    setProduct(json.products);
-  }
+    try {
+      setLoading(true);
+      const data = await fetch("https://dummyjson.com/products?limit=500");
+      const json = await data.json();
+      setProduct(json.products);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  // pagination logic
   const totalProduct = product.length;
   const productPerPage = 10;
   const totalPages = Math.ceil(totalProduct / productPerPage);
@@ -36,8 +42,18 @@ const Pagination = () => {
   const start = currentPage * productPerPage;
   const end = start + productPerPage;
 
-  return (
-    <div className='bg-gray-200 min-h-screen '>
+  const Loading = () => {
+    return (
+      <div className='min-h-screen flex justify-center items-center'>
+        <div className='w-10 h-10 border-4 border-purple-900 border-t-transparent rounded-full animate-spin'></div>
+      </div>
+    );
+  };
+
+  return loading ? (
+    <Loading />
+  ) : (
+    <div className='bg-gray-200 min-h-screen'>
       <div className='max-w-7xl mx-auto p-4'>
         <h1 className='text-2xl font-bold mb-4'>Pagination Question</h1>
 
@@ -72,16 +88,17 @@ const Pagination = () => {
           </button>
         </div>
 
-        {/* Product List */}
         {product.length === 0 ? (
           <h1>No Product Found</h1>
         ) : (
-          product.slice(start, end).map((p) => (
-            <div key={p.id} className='flex flex-col items-center w-40 border border-gray-900 mb-2 p-2'>
-              <img src={p.thumbnail} alt={p.title} className='w-20 h-20 object-cover mr-4' />
-              <p className='text-lg font-medium'>{p.title}</p>
-            </div>
-          ))
+          <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4'>
+            {product.slice(start, end).map((p) => (
+              <div key={p.id} className='flex flex-col items-center w-40 border border-gray-900 mb-2 p-2 bg-white shadow-md'>
+                <img src={p.thumbnail} alt={p.title} className='w-20 h-20 object-cover mb-2' />
+                <p className='text-sm text-center'>{p.title}</p>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>

@@ -4,8 +4,7 @@ import React, { useState } from 'react'
 const Chips = () => {
     const [input, setInput] = useState("");
     const [chips, setChips] = useState(["hello", "workd"]);
-    const handleKeypress = (e) => {
-    
+    const handleKeypress = (e) => {   
         if (e.key === "Enter" && input.trim() !=="") {
             setChips((prev)=>[...prev,input])
             setInput("")
@@ -17,6 +16,7 @@ const Chips = () => {
         newChips.splice(index,1)
         setChips(newChips)
     }
+    
     return (
         <div className='flex flex-col items-center gap-2 mt-10 justify-center '>
             <div>
