@@ -17,6 +17,8 @@ import ContactForm from "./components/Easy/ContactForm/ContactForm";
 import Counter from "./components/VeryEasy/Counter/Counter";
 import OddEven from "./components/VeryEasy/oddEven/OddEven";
 import GuessNumber from "./components/VeryEasy/GuessNumber/GuessNumber";
+import FilterRecipie from "./components/FilterRecipie/FilterRecipie";
+import FocusInput from "./components/VeryEasy/FocusInput/FocusInput";
 
 export default function Home() {
   return (
@@ -38,7 +40,9 @@ export default function Home() {
        {/* <ContactForm/> */}
        {/* <Counter/> */}
        {/* <OddEven/> */}
-       <GuessNumber/>
+       {/* <GuessNumber/> */}
+       {/* <FilterRecipie/> */}
+       <FocusInput/>
     </div>
   );
 }
