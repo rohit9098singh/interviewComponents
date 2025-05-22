@@ -13,6 +13,10 @@ import Todo from "./components/Todo/Todo";
 import BlogPost from "./components/BlogPost/BlogPost";
 import Accordian from "./components/Easy/accordian/Accordian";
 import AkshaySidebar from "./components/Easy/AkshaySidebar/AkshaySidebar";
+import ContactForm from "./components/Easy/ContactForm/ContactForm";
+import Counter from "./components/VeryEasy/Counter/Counter";
+import OddEven from "./components/VeryEasy/oddEven/OddEven";
+import GuessNumber from "./components/VeryEasy/GuessNumber/GuessNumber";
 
 export default function Home() {
   return (
@@ -30,7 +34,11 @@ export default function Home() {
        {/* <PasswordStrength/> */}
        {/* <BlogPost/> */}
        {/* <Accordian/> */}
-       <AkshaySidebar/>
+       {/* <AkshaySidebar/> */}
+       {/* <ContactForm/> */}
+       {/* <Counter/> */}
+       {/* <OddEven/> */}
+       <GuessNumber/>
     </div>
   );
 }
