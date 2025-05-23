@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DarkModeSwitcher = () => {
+const ImageGalary = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const DarkModeSwitcher = () => {
   )
 }
 
-export default DarkModeSwitcher
+export default ImageGalary

@@ -19,6 +19,16 @@ import OddEven from "./components/VeryEasy/oddEven/OddEven";
 import GuessNumber from "./components/VeryEasy/GuessNumber/GuessNumber";
 import FilterRecipie from "./components/FilterRecipie/FilterRecipie";
 import FocusInput from "./components/VeryEasy/FocusInput/FocusInput";
+import DarkMode from "./components/Easy/DarkMode/DarkMode";
+import SortedList from "./components/sortedList/SortedList";
+import StopWatch from "./components/Easy/stopwatch/StopWatch";
+import ToolTip from "./components/Easy/ToolTip/ToolTip";
+import Modal from "./components/VeryEasy/Modal/Modal";
+import Calculator from "./components/Calculator/Calculator";
+import DiceRoller from "./components/DiceRoller/DiceRoller";
+import Skeleton from "./components/VeryEasy/skeleton/Skeleton";
+import Crousel from "./components/VeryEasy/crousel/Crousel";
+import ImageCrousel from "./components/ImageCrousel/ImageCrousel";
 
 export default function Home() {
   return (
@@ -42,7 +52,18 @@ export default function Home() {
        {/* <OddEven/> */}
        {/* <GuessNumber/> */}
        {/* <FilterRecipie/> */}
-       <FocusInput/>
+       {/* <FocusInput/> */}
+       {/* <DarkMode/> */}
+       {/* <SortedList/> */}
+       {/* <StopWatch/> */}
+       {/* <ToolTip/> */}
+       {/* <Modal/> */}
+       {/* <Calculator/> */}
+       {/* <DiceRoller/> */}
+       {/* <Skeleton/> */}
+       {/* <Crousel/> */}
+       <ImageCrousel/>
+      
     </div>
   );
 }
