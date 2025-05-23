@@ -29,6 +29,9 @@ import DiceRoller from "./components/DiceRoller/DiceRoller";
 import Skeleton from "./components/VeryEasy/skeleton/Skeleton";
 import Crousel from "./components/VeryEasy/crousel/Crousel";
 import ImageCrousel from "./components/ImageCrousel/ImageCrousel";
+import ImageGalary from "./components/ImageGalary/ImageGalary";
+import TodoListpartTwo from "./components/TodoListPart2/TodoListpartTwo";
+import StarRating from "./components/Easy/StartRating/StarRating";
 
 export default function Home() {
   return (
@@ -62,7 +65,10 @@ export default function Home() {
        {/* <DiceRoller/> */}
        {/* <Skeleton/> */}
        {/* <Crousel/> */}
-       <ImageCrousel/>
+       {/* <ImageCrousel/> */}
+       {/* <ImageGalary/> */}
+       {/* <TodoListpartTwo/> */}
+       <StarRating/>
       
     </div>
   );
