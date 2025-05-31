@@ -32,6 +32,11 @@ import ImageCrousel from "./components/ImageCrousel/ImageCrousel";
 import ImageGalary from "./components/ImageGalary/ImageGalary";
 import TodoListpartTwo from "./components/TodoListPart2/TodoListpartTwo";
 import StarRating from "./components/Easy/StartRating/StarRating";
+import BmiCalculator from "./components/BmiCalculator/BmiCalculator";
+import ResusableToast from "./components/ReusableToast/ResusableToast";
+import ProductStore from "./components/hard/ProductStore/ProductStore";
+import Today from "./components/today/Today";
+import AddInput from "./components/addinput/AddInput";
 
 export default function Home() {
   return (
@@ -68,7 +73,12 @@ export default function Home() {
        {/* <ImageCrousel/> */}
        {/* <ImageGalary/> */}
        {/* <TodoListpartTwo/> */}
-       <StarRating/>
+       {/* <StarRating/> */}
+       {/* <BmiCalculator/> */}
+       {/* <ResusableToast/> */}
+       {/* <ProductStore/> */}
+       {/* <Today/> */}
+       <AddInput/>
       
     </div>
   );
