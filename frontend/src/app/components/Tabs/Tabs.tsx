@@ -18,13 +18,13 @@ const Tabs = () => {
 
   const [errors, setErrors] = useState<{ [key: number]: string }>({});
 
-  const profileValidation = () => {
-    const { email, name, age } = profileData;
-    if (!email || !name || !age) return "All profile fields are required";
-    if (!email.includes("@")) return "Invalid email address";
-    if (Number(age) <= 0) return "Age must be a positive number";
-    return "";
-  };
+const profileValidation = () => {
+  const { email, name, age } = profileData;
+  if (!email || !name || !age) return "All profile fields are required";
+  if (!email.includes("@")) return "Invalid email address";
+  if (Number(age) <= 0) return "Age must be a positive number";
+  return "";
+};
 
   const settingsValidation = () => {
     if (!settingsData.theme) return "Theme is required";
@@ -155,3 +155,6 @@ const Tabs = () => {
 };
 
 export default Tabs;
+
+
+

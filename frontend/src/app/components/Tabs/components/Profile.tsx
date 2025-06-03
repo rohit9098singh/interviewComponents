@@ -45,3 +45,5 @@ const Profile = ({ data, setData, error }:any) => {
 };
 
 export default Profile;
+
+

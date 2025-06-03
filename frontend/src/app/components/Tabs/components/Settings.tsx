@@ -25,3 +25,6 @@ const Settings = ({ data, setData, error }:any) => {
 };
 
 export default Settings;
+
+
+

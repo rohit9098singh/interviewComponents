@@ -37,14 +37,19 @@ import ResusableToast from "./components/ReusableToast/ResusableToast";
 import ProductStore from "./components/hard/ProductStore/ProductStore";
 import Today from "./components/today/Today";
 import AddInput from "./components/addinput/AddInput";
+import Timer from "./components/Timer/Timer";
+import UserRef from "./components/Useref/UserRef";
+import From from "./components/From/From";
+import WithLocalStorage from "./components/GoogleSearchBar/GoogleSearchBar";
 
 export default function Home() {
   return (
     <div className=""> 
        {/* <Tabs/> */}
       {/* <GoogleSearchBar/>  */}
+      {/* <WithLocalStorage/> */}
        {/* <Otp/> */}
-       {/* <Chips/> */}
+       <Chips/>
        {/* <Practice/> */}
        {/* <Todo/> */}
        {/* <Progress/> */}
@@ -78,7 +83,10 @@ export default function Home() {
        {/* <ResusableToast/> */}
        {/* <ProductStore/> */}
        {/* <Today/> */}
-       <AddInput/>
+       {/* <AddInput/> */}
+       {/* <Timer/> */}
+       {/* <UserRef/> */}
+       {/* <From/> */}
       
     </div>
   );

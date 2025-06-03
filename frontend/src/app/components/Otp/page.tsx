@@ -19,6 +19,8 @@ const Otp = () => {
     setInputArray(newArr);
     newValue&&inputRef.current[index+1]?.focus();
   };
+
+
   const handleKeyChange=(e,index)=>{
     console.log(e.key);
     if(!e.target.value &&  e.key==="Backspace"){
@@ -29,9 +31,7 @@ const Otp = () => {
     }
     if(e.key==="ArrowRight"  && !e.target.value){
         inputRef.current[index-1]?.focus();
-
     }
-  
   }
 
 
@@ -51,5 +51,5 @@ const Otp = () => {
     </div>
   );
 };
-
 export default Otp;
+

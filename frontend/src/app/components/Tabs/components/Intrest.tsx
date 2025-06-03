@@ -22,3 +22,6 @@ const Interest = ({ data, setData, error }:any) => {
 };
 
 export default Interest;
+
+
+
