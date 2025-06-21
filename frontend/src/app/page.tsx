@@ -6,7 +6,6 @@ import Otp from "./components/Otp/page";
 import Pagination from "./components/pagination/Pagination";
 import PasswordStrength from "./components/Easy/PasswordStrength/PasswordStrength";
 import Practice from "./components/practice/Practice";
-import Progress from "./components/Progress/Progress";
 import Sidebar from "./components/sidebar/Sidebar";
 import Tabs from "./components/Tabs/Tabs";
 import Todo from "./components/Todo/Todo";
@@ -41,6 +40,8 @@ import Timer from "./components/Timer/Timer";
 import UserRef from "./components/Useref/UserRef";
 import From from "./components/From/From";
 import WithLocalStorage from "./components/GoogleSearchBar/GoogleSearchBar";
+import Progress from "./components/Easy/Progress/Progress";
+import Employee from "./components/employee/Employee";
 
 export default function Home() {
   return (
@@ -49,7 +50,7 @@ export default function Home() {
       {/* <GoogleSearchBar/>  */}
       {/* <WithLocalStorage/> */}
        {/* <Otp/> */}
-       <Chips/>
+       {/* <Chips/> */}
        {/* <Practice/> */}
        {/* <Todo/> */}
        {/* <Progress/> */}
@@ -87,6 +88,7 @@ export default function Home() {
        {/* <Timer/> */}
        {/* <UserRef/> */}
        {/* <From/> */}
+       <Employee/>
       
     </div>
   );

@@ -40,6 +40,7 @@ const Profile = ({ data, setData, error }:any) => {
           className="border border-gray-400 rounded-md p-2 w-full"
         />
       </div>
+      
     </div>
   );
 };

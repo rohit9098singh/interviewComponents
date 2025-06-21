@@ -30,3 +30,6 @@ const Progressbar = ({ progress }) => {
 };
 
 export default Progressbar;
+
+
+
