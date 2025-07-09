@@ -67,17 +67,17 @@ const Pagination = () => {
             ◀️
           </button>
 
-          {[...Array(totalPages).keys()].map((n) => (
+          {Array.from({ length: totalPages }).map((_,n) => (
             <span
               key={n}
               onClick={() => handlePageClick(n)}
-              className={`p-2 cursor-pointer rounded-md mx-1 ${
-                n === currentPage ? 'bg-blue-600 text-white' : 'bg-gray-400 text-green-500'
-              }`}
+              className={`p-2 cursor-pointer rounded-md mx-1 ${n === currentPage ? 'bg-blue-600 text-white' : 'bg-gray-400 text-green-500'
+                }`}
             >
               {n + 1}
             </span>
           ))}
+
 
           <button
             disabled={currentPage === totalPages - 1}

@@ -15,7 +15,6 @@ const Tabs = () => {
 
   const [settingsData, setSettingsData] = useState({ theme: "" });
   const [interestData, setInterestData] = useState({ hobbie: "" });
-
   const [errors, setErrors] = useState<{ [key: number]: string }>({});
 
 const profileValidation = () => {
@@ -36,6 +35,10 @@ const profileValidation = () => {
     return "";
   };
 
+  // 3 state banao insitial state ka 
+  // fir 3 ka ek validation handler fucntion bano jounko handle karega
+  // unko ek array me store kar do easy rahega 
+  //
   const validation = [profileValidation, settingsValidation, interestValidation];
 
   const handleNext = () => {
@@ -62,6 +65,7 @@ const profileValidation = () => {
       setErrors({ [activeTab]: errorMsg });
       return;
     }
+  
 
     const allData = {
       profile: profileData,

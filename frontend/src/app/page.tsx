@@ -42,6 +42,7 @@ import From from "./components/From/From";
 import WithLocalStorage from "./components/GoogleSearchBar/GoogleSearchBar";
 import Progress from "./components/Easy/Progress/Progress";
 import Employee from "./components/employee/Employee";
+import Table from "./components/table/Table";
 
 export default function Home() {
   return (
@@ -54,7 +55,7 @@ export default function Home() {
        {/* <Practice/> */}
        {/* <Todo/> */}
        {/* <Progress/> */}
-       {/* <Pagination/> */}
+       <Pagination/>
        {/* <Authentication/> */}
        {/* <MortageCalender/> */}
        {/* <PasswordStrength/> */}
@@ -88,7 +89,8 @@ export default function Home() {
        {/* <Timer/> */}
        {/* <UserRef/> */}
        {/* <From/> */}
-       <Employee/>
+       {/* <Employee/> */}
+       {/* <Table/> */}
       
     </div>
   );
