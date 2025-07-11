@@ -22,7 +22,7 @@ import DarkMode from "./components/Easy/DarkMode/DarkMode";
 import SortedList from "./components/sortedList/SortedList";
 import StopWatch from "./components/Easy/stopwatch/StopWatch";
 import ToolTip from "./components/Easy/ToolTip/ToolTip";
-import Modal from "./components/VeryEasy/Modal/Modal";
+import Modal from "./components/VeryEasy/Modal/ModalQuestion";
 import Calculator from "./components/Calculator/Calculator";
 import DiceRoller from "./components/DiceRoller/DiceRoller";
 import Skeleton from "./components/VeryEasy/skeleton/Skeleton";
@@ -43,6 +43,8 @@ import WithLocalStorage from "./components/GoogleSearchBar/GoogleSearchBar";
 import Progress from "./components/Easy/Progress/Progress";
 import Employee from "./components/employee/Employee";
 import Table from "./components/table/Table";
+import {Question26} from "./components/date/Question26"
+import ModalQuestion from "./components/VeryEasy/Modal/ModalQuestion";
 
 export default function Home() {
   return (
@@ -55,7 +57,7 @@ export default function Home() {
        {/* <Practice/> */}
        {/* <Todo/> */}
        {/* <Progress/> */}
-       <Pagination/>
+       {/* <Pagination/> */}
        {/* <Authentication/> */}
        {/* <MortageCalender/> */}
        {/* <PasswordStrength/> */}
@@ -90,7 +92,9 @@ export default function Home() {
        {/* <UserRef/> */}
        {/* <From/> */}
        {/* <Employee/> */}
-       {/* <Table/> */}
+       <Table/>
+       {/* <Question26/> */}
+       {/* <ModalQuestion/> */}
       
     </div>
   );
