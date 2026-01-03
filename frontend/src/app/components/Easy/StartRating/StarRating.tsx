@@ -22,7 +22,7 @@ const StarRating = () => {
                          ★  
                      </span>
                 ))
-            }
+              }
             </div>
             <p className='text-lg font-semibold'>
                 {rating ===0 ? "No rating yet":`you rated: ${rating} stars`}

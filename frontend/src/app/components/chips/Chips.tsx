@@ -6,6 +6,10 @@ const Chips = () => {
     const [chips, setChips] = useState(["hello", "workd"]);
     const handleKeypress = (e) => {   
         if (e.key === "Enter" && input.trim() !=="") {
+            const obj={
+                input:input,
+                id:Date.now()
+            }
             setChips((prev)=>[...prev,input])
             setInput("")
         }
@@ -28,6 +32,7 @@ const Chips = () => {
                     onChange={(e) => { setInput(e.target.value) }}
                     onKeyDown={(e) => handleKeypress(e)}
                 />
+                
             </div>
             <div className='flex gap-4 text-center'>
                 {
@@ -39,7 +44,7 @@ const Chips = () => {
                             {chip}
                             <button
                                 className='text-black-500 py-1 px-2 bg-red-600 rounded-md mt-1 cursor-pointer'
-                                onClick={() => handleDelete(index)}
+                                onClick={() => handleDelete(chip.id)}
                             >
                                 x
                             </button>

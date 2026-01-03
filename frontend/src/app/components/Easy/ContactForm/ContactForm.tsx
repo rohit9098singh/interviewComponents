@@ -28,7 +28,7 @@ const ContactForm = () => {
               <label htmlFor="name">Name:</label>
               <input
                 type="text"
-                id="name"
+                // id="name"
                 className="border border-gray-300 p-2 rounded"
                 {...register("name", { required: "Name is required" })}
               />
@@ -41,7 +41,7 @@ const ContactForm = () => {
               <label htmlFor="email">Email:</label>
               <input
                 type="email"
-                id="email"
+                // id="email"
                 className="border border-gray-300 p-2 rounded"
                 {...register("email", { required: "Email is required" })}
               />

@@ -5,7 +5,6 @@ import MortageCalender from "./components/Easy/MortageCalender/MortageCalender";
 import Otp from "./components/Otp/page";
 import Pagination from "./components/pagination/Pagination";
 import PasswordStrength from "./components/Easy/PasswordStrength/PasswordStrength";
-import Practice from "./components/practice/Practice";
 import Sidebar from "./components/sidebar/Sidebar";
 import Tabs from "./components/Tabs/Tabs";
 import Todo from "./components/Todo/Todo";
@@ -45,7 +44,13 @@ import Employee from "./components/employee/Employee";
 import Table from "./components/table/Table";
 import {Question26} from "./components/date/Question26"
 import ModalQuestion from "./components/VeryEasy/Modal/ModalQuestion";
-
+import CheckboxSelector from "./components/SamQuestion/Checkbox";
+import Navbar from "../app/components/Navbar/Navbar"
+import MouseFollower from "./components/circle/Circle";
+import Parent from "./components/new/Parent"
+import Debounce from "./components/debounce/Debounce"
+import Project from "./components/project/page"
+import Check from "./components/Easy/accordian/Check";
 export default function Home() {
   return (
     <div className=""> 
@@ -63,14 +68,15 @@ export default function Home() {
        {/* <PasswordStrength/> */}
        {/* <BlogPost/> */}
        {/* <Accordian/> */}
+       <Check/>
        {/* <AkshaySidebar/> */}
        {/* <ContactForm/> */}
        {/* <Counter/> */}
        {/* <OddEven/> */}
        {/* <GuessNumber/> */}
        {/* <FilterRecipie/> */}
-       {/* <FocusInput/> */}
-       {/* <DarkMode/> */}
+       {/* <FocusInput/>
+       <DarkMode/> */}
        {/* <SortedList/> */}
        {/* <StopWatch/> */}
        {/* <ToolTip/> */}
@@ -79,8 +85,8 @@ export default function Home() {
        {/* <DiceRoller/> */}
        {/* <Skeleton/> */}
        {/* <Crousel/> */}
-       {/* <ImageCrousel/> */}
-       {/* <ImageGalary/> */}
+       {/* <ImageCrousel/>
+       <ImageGalary/> */}
        {/* <TodoListpartTwo/> */}
        {/* <StarRating/> */}
        {/* <BmiCalculator/> */}
@@ -92,10 +98,15 @@ export default function Home() {
        {/* <UserRef/> */}
        {/* <From/> */}
        {/* <Employee/> */}
-       <Table/>
+       {/* <Table/> */}
        {/* <Question26/> */}
        {/* <ModalQuestion/> */}
-      
+       {/* <CheckboxSelector/> */}
+       {/* <Navbar/> */}
+       {/* <MouseFollower/> */}
+         {/* <Parent/> */}
+         {/* <Debounce/> */}
+          <Project/>
     </div>
   );
 }

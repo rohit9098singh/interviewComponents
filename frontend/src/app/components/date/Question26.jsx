@@ -1,44 +1,77 @@
-"use client"
-import { ArrowLeft, ArrowRight } from 'lucide-react'
-import React, { useState } from 'react'
+"use client";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import React, { useState } from "react";
 
 export const Question26 = () => {
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    const [month, setMonth] = useState(7)
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const [month, setMonth] = useState(7); // 1-based: July
+  const [year, setYear] = useState(2025);
 
-    const year = 2025
-    const firstDayOfMonth = new Date(year, month - 1, 1).getDay()
-    const totalDays = new Date(year, month, 0).getDate()
+  const handlePrev = () => {
+    if (month === 1) {
+      setMonth(12);
+      setYear((prev) => prev - 1);
+    } else {
+      setMonth((prev) => prev - 1);
+    }
+  };
 
-    return (
-        <div className="bg-slate-600 min-h-[60vh] rounded p-6 flex items-center justify-center">
-            <div className="bg-white rounded-lg text-black p-6 w-[350px]">
-                <div className='flex justify-between items-center'>
-                    <ArrowLeft className='h-8 w-8 rounded bg-gray-200 p-1' onClick={() => setMonth(month - 1)} />
-                    <h1 className="text-2xl font-bold mb-4 text-center">Calendar - {month}/{year}</h1>
-                    <ArrowRight className='h-8 w-8 rounded bg-gray-200 p-1' onClick={() => setMonth(month + 1)} />
-                </div>
+  const handleNext = () => {
+    if (month === 12) {
+      setMonth(1);
+      setYear((prev) => prev + 1);
+    } else {
+      setMonth((prev) => prev + 1);
+    }
+  };
 
-                <div className="grid grid-cols-7 gap-2 font-semibold text-center mb-2">
-                    {days.map((day, index) => (
-                        <div key={index}>{day}</div>
-                    ))}
-                </div>
+  const firstDayOfMonth = new Date(year, month - 1, 1).getDay(); // 1st is year 2nd is month 3rd is firstDay of month
+  const totalDays = new Date(year, month, 0).getDate();
 
-                <div className="grid grid-cols-7 gap-2 text-center">
-                    {Array.from({ length: firstDayOfMonth }).map((_, index) => (
-                        <div key={index}></div>
-                    ))}
 
-                    {Array.from({ length: totalDays }).map((_, index) => (
-                        <div key={index} className="p-2 bg-gray-200 rounded hover:bg-blue-300 cursor-pointer">
-                            {index + 1}
-                        </div>
-                    ))}
-                </div>
-            </div>
+  return (
+    <div className="bg-slate-600 min-h-[60vh] rounded p-6 flex items-center justify-center">
+      <div className="bg-white rounded-lg text-black p-6 w-[350px]">
+        <div className="flex justify-between items-center">
+          <ArrowLeft
+            className="h-8 w-8 rounded bg-gray-200 p-1"
+            onClick={handlePrev}
+          />
+          <h1 className="text-2xl font-bold mb-4 text-center">
+            Calendar - {month}/{year}
+          </h1>
+          <ArrowRight
+            className="h-8 w-8 rounded bg-gray-200 p-1"
+            onClick={handleNext}
+          />
         </div>
-    )
-}
 
-export default Question26
+        <div className="grid grid-cols-7 gap-2 font-semibold text-center mb-2">
+          {days.map((day, index) => (
+            <div key={index}>{day}</div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-7 gap-2 text-center">
+          {Array.from({ length: firstDayOfMonth }).map((_, index) => (
+            <div key={index}></div>
+          ))}
+
+          {Array.from({ length: totalDays }).map((_, index) => (
+            <div
+              key={index}
+              className="p-2 bg-gray-200 rounded hover:bg-blue-300 cursor-pointer"
+            >
+              {index + 1}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Question26;
+
+
+

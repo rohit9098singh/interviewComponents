@@ -39,7 +39,7 @@ const ImageCarousel = () => {
   const handleNext = () => {
     setCurrentImageIndex(prev => (prev === totalImages - 1 ? 0 : prev + 1));
   };
-
+   
   return (
     <div className='bg-green-200 min-h-screen flex flex-col justify-center items-center gap-4'>
       <div className='relative w-[500px] h-[300px]'>

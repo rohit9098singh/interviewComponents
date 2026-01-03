@@ -2,12 +2,17 @@ import React from "react";
 
 const Profile = ({ data, setData, error }:any) => {
   const handleChange = (e:any) => {
-    setData((prev:any) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const {name,value}=e.target;
+    setData((prev:any)=>(
+      {...prev,[name]:value}
+    ))
+    // setData((prev:any) => ({
+    //   ...prev,
+    //   [e.target.name]: e.target.value,
+    // }));
   };
 
+// 
   return (
     <div className="space-y-4 max-w-md">
       <div className="flex gap-2 items-center">

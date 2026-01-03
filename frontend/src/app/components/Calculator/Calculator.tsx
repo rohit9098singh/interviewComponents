@@ -1,27 +1,65 @@
-import React from 'react'
+"use client"
+import { useState } from "react";
 
-const Calculator = () => {
-    return (
-        <div className='bg-green-200 min-h-screen flex justify-center items-center'>
-            <div className='max-w-md w-full bg-white rounded-xl shadow-md p-6 border border-green-300'>
-                <h1 className='text-center text-2xl font-bold text-green-700 bg-green-100 py-2 px-4 rounded-md mb-6'>Simple Calculator</h1>
-                <div className='flex flex-col gap-6'>
-                    <input
-                        type='number'
-                        className='border-2 border-green-400 rounded-md p-3 text-lg focus:outline-none focus:ring-2 focus:ring-green-500'
-                        placeholder='Enter a number'
-                    />
-                    <div className='flex gap-4'>
-                        <button className='bg-black text-white p-3 rounded-lg'> <span className='h-18 w-18'>🗑️</span></button>
-                        <button className='p-3 rounded-lg bg-green-100 text-black' ></button>
-                        <button></button>
-                        <button></button>
-                    </div>
-                </div>
-            </div>
+export default function Calculator() {
+  const [num1, setNum1] = useState("");
+  const [num2, setNum2] = useState("");
+  const [operator, setOperator] = useState("+");
+  const [result, setResult] = useState("");
 
-        </div>
-    )
+  const handleCalculate = () => {
+    try {
+      // Build expression like "5+3" and evaluate
+      const expression = `${num1} ${operator} ${num2}`;
+      setResult(eval(expression));
+    } catch (error) {
+      setResult("Invalid Input");
+    }
+  };
+  
+  return (
+    <div className="flex flex-col items-center mt-10 space-y-4">
+      <h2 className="text-2xl font-bold">Calculator</h2>
+
+      <div className="flex space-x-2">
+        <input
+          type="number"
+          value={num1}
+          onChange={(e) => setNum1(e.target.value)}
+          placeholder="First number"
+          className="border p-2 rounded"
+        />
+
+        <select
+          value={operator}
+          onChange={(e) => setOperator(e.target.value)}
+          className="border p-2 rounded"
+        >
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">×</option>
+          <option value="/">÷</option>
+        </select>
+
+        <input
+          type="number"
+          value={num2}
+          onChange={(e) => setNum2(e.target.value)}
+          placeholder="Second number"
+          className="border p-2 rounded"
+        />
+      </div>
+
+      <button
+        onClick={handleCalculate}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        Calculate
+      </button>
+
+      <div className="text-lg font-semibold">
+        {result !== "" && `Result: ${result}`}
+      </div>
+    </div>
+  );
 }
-
-export default Calculator

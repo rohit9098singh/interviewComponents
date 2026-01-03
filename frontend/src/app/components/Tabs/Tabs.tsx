@@ -66,6 +66,7 @@ const profileValidation = () => {
       return;
     }
   
+   
 
     const allData = {
       profile: profileData,
@@ -122,7 +123,6 @@ const profileValidation = () => {
           </button>
         ))}
       </div>
-
       <div className="border rounded-md p-4">{tabsContent[activeTab].content}</div>
 
       {errors[activeTab] && (

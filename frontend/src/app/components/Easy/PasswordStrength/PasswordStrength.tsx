@@ -18,7 +18,6 @@ const PasswordStrength = () => {
         if (/[a-z]/.test(pwd)) score++;
         if (/[0-9]/.test(pwd)) score++;
         if (/[^A-Za-z0-9]/.test(pwd)) score++;
-
         if (score <= 2) return 'Weak';
         if (score === 3 || score === 4) return 'Moderate';
         if (score === 5) return 'Strong';

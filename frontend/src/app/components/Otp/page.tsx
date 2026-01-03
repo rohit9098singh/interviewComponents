@@ -13,9 +13,10 @@ const Otp = () => {
 
   const handleChange = (value, index) => {
     if(isNaN(value)) return ;
-    const newValue=value.trim();
+    const newValue=value.trim().slice(-1);
     const newArr = [...inputArray];
-    newArr[index] = newValue.slice(-1);
+    // newArr[index] = newValue.slice(-1);
+    newArr[index]=newValue
     setInputArray(newArr);
     newValue&&inputRef.current[index+1]?.focus();
   };
@@ -51,5 +52,8 @@ const Otp = () => {
     </div>
   );
 };
+
+
+
 export default Otp;
 

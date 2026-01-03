@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 
-const items = [
+export const items = [
     {
         title: "JavaScript Basics",
         content: "Learn variables, functions, and loops in JavaScript."
