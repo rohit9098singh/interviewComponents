@@ -16,7 +16,7 @@ const Check = () => {
         setIsAccordianOpen((prev) => prev === index ? null : index)
     }
     return (
-        <div className='flex justify-center items-center bg-green-100 '>
+        <div className='flex justify-center items-center bg-green-100 min-h-screen'>
             <div className='flex flex-col gap-4'>
                 {
                     data.map((item, index) => (
