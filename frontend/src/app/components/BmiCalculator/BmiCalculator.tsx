@@ -1,78 +1,124 @@
 "use client"
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from "react"
+
+type FormDataProps = {
+  height: string
+  weight: string
+}
+
+type ErrorProps = {
+  height?: string
+  weight?: string
+}
 
 const BmiCalculator = () => {
-    const [heightValue, setHeightValue] = useState("");
-    const [weightValue, setWeightValue] = useState("");
-    const [bmi, setBmi] = useState(null);
+  const [bmiFormData, setBmiFormData] = useState<FormDataProps>({
+    height: "",
+    weight: ""
+  })
 
-    const handleHeightChange = (e) => {
-        setHeightValue(e.target.value);
-    };
+  const [errors, setErrors] = useState<ErrorProps>({})
+  const [result, setResult] = useState<number | null>(null)
 
-    const handleWeightChange = (e) => {
-        setWeightValue(e.target.value);
-    };
+  // ✅ Validation
+  const validate = () => {
+    const newErrors: ErrorProps = {}
 
-    const handleCalCulateBmi = () => {
-        if (!heightValue || !weightValue) return;
+    if (!bmiFormData.height) {
+      newErrors.height = "Height is required"
+    }
 
-        const heightInMeters = parseFloat(heightValue) / 100;
-        const weightInKg = parseFloat(weightValue);
-        const bmiValue = weightInKg / (heightInMeters * heightInMeters);
-        setBmi(bmiValue.toFixed(2));
-    };
+    if (!bmiFormData.weight) {
+      newErrors.weight = "Weight is required"
+    }
 
-    const handleReset = () => {
-        setHeightValue("");
-        setWeightValue("");
-        setBmi(null);
-    };
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
-    return (
-        <div className="min-h-screen bg-green-100 flex justify-center items-center">
-            <div className="flex flex-col gap-4 items-center">
-                <h1 className="text-2xl font-bold">BMI Calculator</h1>
-                <div className="flex flex-col gap-2">
-                    <input
-                        value={heightValue}
-                        onChange={handleHeightChange}
-                        type="number"
-                        className="border border-gray-200 p-1 w-52"
-                        placeholder="Height (cm)"
-                    />
-                    <input
-                        value={weightValue}
-                        onChange={handleWeightChange}
-                        type="number"
-                        className="border border-gray-200 p-1 w-52"
-                        placeholder="Weight (kg)"
-                    />
-                    <div className="flex gap-2">
-                        <button
-                            onClick={handleCalCulateBmi}
-                            className="w-3/4 border cursor-pointer bg-gray-200 rounded-md px-4 py-1">
-                            Calculate BMI
-                        </button>
-                        <button
-                            onClick={handleReset}
-                            className="border cursor-pointer bg-gray-200 rounded-md px-4 py-1">
-                            Reset
-                        </button>
-                    </div>
-                    {bmi && <p className="mt-2 font-semibold">Your BMI is: {bmi}</p>}
-                </div>
-            </div>
+  // ✅ Calculate BMI
+  const handleCalculate = () => {
+    if (!validate()) return
+
+    const heightInMeters = Number(bmiFormData.height) / 100
+    const weight = Number(bmiFormData.weight)
+
+    const bmi = weight / (heightInMeters * heightInMeters)
+    setResult(Number(bmi.toFixed(2)))
+  }
+
+  // ✅ Reset form
+  const handleReset = () => {
+    setBmiFormData({ height: "", weight: "" })
+    setErrors({})
+    setResult(null)
+  }
+
+  // ✅ Handle input change
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    setBmiFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="rounded-md max-w-md w-full bg-white p-6 flex flex-col gap-4 shadow-md">
+        <h2 className="text-xl font-semibold text-center">BMI Calculator</h2>
+
+        <div className="flex flex-col gap-1">
+          <label>Height (cm)</label>
+          <input
+            type="number"
+            name="height"
+            value={bmiFormData.height}
+            onChange={handleChange}
+            className="border border-gray-400 p-3 rounded"
+          />
+          {errors.height && (
+            <span className="text-red-500 text-sm">{errors.height}</span>
+          )}
         </div>
-    );
-};
 
-export default BmiCalculator;
+        <div className="flex flex-col gap-1">
+          <label>Weight (kg)</label>
+          <input
+            type="number"
+            name="weight"
+            value={bmiFormData.weight}
+            onChange={handleChange}
+            className="border border-gray-400 p-3 rounded"
+          />
+          {errors.weight && (
+            <span className="text-red-500 text-sm">{errors.weight}</span>
+          )}
+        </div>
 
+        <button
+          onClick={handleCalculate}
+          className="rounded-lg px-5 py-2 bg-green-500 text-white font-medium"
+        >
+          Calculate
+        </button>
 
-// BMI= Weight(kg) /(Height (m)) ^2
+        <button
+          onClick={handleReset}
+          className="rounded-lg px-5 py-2 bg-red-500 text-white font-medium"
+        >
+          Reset
+        </button>
 
+        {result !== null && (
+          <p className="text-center font-semibold text-lg">
+            Your BMI is: <span className="text-blue-600">{result}</span>
+          </p>
+        )}
+      </div>
+    </div>
+  )
+}
 
- 
-
-
+export default BmiCalculator
