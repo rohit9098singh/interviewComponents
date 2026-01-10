@@ -1,6 +1,14 @@
 import React from 'react';
 
-const PostCard = ({ title, body, tags, reactions, views }) => {
+type blogPostProps={
+  title:string,
+  body:string,
+  tags:string [],
+  reactions:{likes:string,dislikes:string},
+  views:string
+}
+
+const PostCard = ({ title, body, tags, reactions, views }:blogPostProps) => {
   return (
     <div className="bg-white shadow-md rounded-xl p-6 mb-6 max-w-xl mx-auto border border-gray-200">
       <h2 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h2>
