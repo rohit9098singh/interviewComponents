@@ -27,7 +27,7 @@ const MortgageCalculator = () => {
     setMonthlyPayment(Number(payment.toFixed(2)));
      reset();
   };
-
+ 
   return (
     <div className="min-h-screen justify-center flex items-center">
       <div className="flex flex-col gap-4">

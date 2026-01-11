@@ -2,30 +2,30 @@
 import React, { useState } from 'react'
 
 const WithoutUseForm = () => {
-    const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
+  const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
   const [error, setError] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData=new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget);
     const amount = Number(formData.get("amount"));
     const interest = Number(formData.get("interest"));
     const years = Number(formData.get("years"));
 
-    if(amount <= 0 || interest <= 0 || years <= 0){
-        setError("Please enter valid positive values.");
+    if (amount <= 0 || interest <= 0 || years <= 0) {
+      setError("Please enter valid positive values.");
       setMonthlyPayment(null);
       return;
     }
     setError("");
-    const montlyIntrest=interest/100/12;
-    const numPayments=years*12;
+    const montlyIntrest = interest / 100 / 12;
+    const numPayments = years * 12;
 
-    const payment=(amount*montlyIntrest)/(1-Math.pow(1+montlyIntrest,-numPayments));
+    const payment = (amount * montlyIntrest) / (1 - Math.pow(1 + montlyIntrest, -numPayments));
     setMonthlyPayment(Number(payment.toFixed(2)))
   }
   return (
-   <div className="min-h-screen justify-center flex items-center">
+    <div className="min-h-screen justify-center flex items-center">
       <div className="flex flex-col gap-4">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <h1 className="text-2xl font-bold">Mortgage Calculator</h1>

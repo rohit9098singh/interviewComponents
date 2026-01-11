@@ -11,7 +11,7 @@ import Todo from "./components/Todo/Todo";
 import BlogPost from "./components/BlogPost/BlogPost";
 import Accordian from "./components/Easy/accordian/Accordian";
 import AkshaySidebar from "./components/Easy/AkshaySidebar/AkshaySidebar";
-import ContactForm from "./components/Easy/ContactForm/ContactForm";
+// import ContactForm from "./components/Easy/ContactForm/ContactForm";
 import Counter from "./components/VeryEasy/Counter/Counter";
 import OddEven from "./components/VeryEasy/oddEven/OddEven";
 import GuessNumber from "./components/VeryEasy/GuessNumber/GuessNumber";
@@ -42,7 +42,7 @@ import WithLocalStorage from "./components/GoogleSearchBar/GoogleSearchBar";
 import Progress from "./components/Easy/Progress/Progress";
 import Employee from "./components/employee/Employee";
 import Table from "./components/table/Table";
-import {Question26} from "./components/date/Question26"
+import Question26 from "./components/date/Question26"
 import ModalQuestion from "./components/VeryEasy/Modal/ModalQuestion";
 import CheckboxSelector from "./components/SamQuestion/Checkbox";
 import Navbar from "../app/components/Navbar/Navbar"
@@ -51,62 +51,67 @@ import Parent from "./components/new/Parent"
 import Debounce from "./components/debounce/Debounce"
 import Project from "./components/project/page"
 import Check from "./components/Easy/accordian/Check";
+// import Form from "./components/Easy/ContactForm/Form";
+import InfiniteScroll from "./components/infinite-scroll/component/InfiniteScroll";
+import Scoll from "./components/infinite-scroll/page";
 export default function Home() {
   return (
-    <div className=""> 
-       {/* <Tabs/> */}
+    <div className="">
+      {/* <Tabs/> */}
       {/* <GoogleSearchBar/>  */}
       {/* <WithLocalStorage/> */}
-       {/* <Otp/> */}
-       {/* <Chips/> */}
-       {/* <Practice/> */}
-       {/* <Todo/> */}
-       {/* <Progress/> */}
-       {/* <Pagination/> */}
-       {/* <Authentication/> */}
-       {/* <MortageCalender/> */}
-       {/* <PasswordStrength/> */}
-       {/* <BlogPost/> */}
-       {/* <Accordian/> */}
-       <Check/>
-       {/* <AkshaySidebar/> */}
-       {/* <ContactForm/> */}
-       {/* <Counter/> */}
-       {/* <OddEven/> */}
-       {/* <GuessNumber/> */}
-       {/* <FilterRecipie/> */}
-       {/* <FocusInput/>
+      {/* <Otp/> */}
+      {/* <Chips/> */}
+      {/* <Practice/> */}
+      {/* <Todo/> */}
+      {/* <Progress/> */}
+      {/* <Pagination/> */}
+      {/* <Authentication/> */}
+      {/* <MortageCalender/> */}
+      {/* <PasswordStrength/> */}
+      {/* <BlogPost/> */}
+      {/* <Accordian/> */}
+      {/* <Check/> */}
+      {/* <AkshaySidebar/> */}
+      {/* <ContactForm/> */}
+      {/* <Form/> */}
+      {/* <Counter/> */}
+      {/* <OddEven/> */}
+      {/* <GuessNumber/> */}
+      {/* <FilterRecipie/> */}
+      {/* <FocusInput/>
        <DarkMode/> */}
-       {/* <SortedList/> */}
-       {/* <StopWatch/> */}
-       {/* <ToolTip/> */}
-       {/* <Modal/> */}
-       {/* <Calculator/> */}
-       {/* <DiceRoller/> */}
-       {/* <Skeleton/> */}
-       {/* <Crousel/> */}
-       {/* <ImageCrousel/>
+      {/* <SortedList/> */}
+      {/* <StopWatch/> */}
+      {/* <ToolTip/> */}
+      {/* <Modal/> */}
+      {/* <Calculator/> */}
+      {/* <DiceRoller/> */}
+      {/* <Skeleton/> */}
+      {/* <Crousel/> */}
+      {/* <ImageCrousel/>
        <ImageGalary/> */}
-       {/* <TodoListpartTwo/> */}
-       {/* <StarRating/> */}
-       {/* <BmiCalculator/> */}
-       {/* <ResusableToast/> */}
-       {/* <ProductStore/> */}
-       {/* <Today/> */}
-       {/* <AddInput/> */}
-       {/* <Timer/> */}
-       {/* <UserRef/> */}
-       {/* <From/> */}
-       {/* <Employee/> */}
-       {/* <Table/> */}
-       {/* <Question26/> */}
-       {/* <ModalQuestion/> */}
-       {/* <CheckboxSelector/> */}
-       {/* <Navbar/> */}
-       {/* <MouseFollower/> */}
-         {/* <Parent/> */}
-         {/* <Debounce/> */}
-          <Project/>
+      {/* <TodoListpartTwo/> */}
+      {/* <StarRating/> */}
+      {/* <BmiCalculator/> */}
+      {/* <ResusableToast/> */}
+      {/* <ProductStore/> */}
+      {/* <Today/> */}
+      {/* <AddInput/> */}
+      {/* <Timer/> */}
+      {/* <UserRef/> */}
+      {/* <From/> */}
+      <Employee/>
+      {/* <Table/> */}
+      {/* <Question26/> */}
+      {/* <ModalQuestion/> */}
+      {/* <CheckboxSelector/> */}
+      {/* <Navbar/> */}
+      {/* <MouseFollower/> */}
+      {/* <Parent/> */}
+      {/* <Debounce/> */}
+      {/* <Project/> */}
+      {/* <Scoll/> */}
     </div>
   );
 }

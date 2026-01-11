@@ -1,41 +1,53 @@
-"use client"
 import { useRef, useCallback } from "react";
 
-// custom hook with apply
 function useDebounce(fn, delay) {
-  const timerRef = useRef();
+  const timerRef = useRef(null);
 
-  const debouncedFn = useCallback(function (...args) {
-    clearTimeout(timerRef.current);
+  const debouncedFn = useCallback(
+    (...args) => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
 
-    timerRef.current = setTimeout(() => {
-      // apply ka use karke fn ko call karna
-      fn.apply(this, args);
-    }, delay);
-  }, [fn, delay]);
+      timerRef.current = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    },
+    [fn, delay]
+  );
 
   return debouncedFn;
 }
- function Debounce() {
+
+
+
+
+const Debounce = () => {
   let count = 0;
 
-  const getData = (val) => {
-    console.log(`fetching the data ${count++} : ${val}`);
+  const getData = async (e) => {
+    const query = e.target.value;
+    if (!query) return;
+    console.log(`API Call #${++count} with query: ${query}`);
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts?q=${query}`
+    );
+
+    const data = await response.json();
+    console.log("Response Data:", data);
   };
 
-  const betterFunction = useDebounce(getData, 500);
+  const debouncedGetData = useDebounce(getData, 500);
 
   return (
     <div>
       <input
         type="text"
-        placeholder="Type something..."
-        onChange={(e) => betterFunction(e.target.value)}
-        style={{ border: "1px solid black", padding: "4px", marginTop: "50px" }}
+        placeholder="Type here..."
+        onChange={(e) => debouncedGetData(e)}
       />
     </div>
   );
 }
 
 export default Debounce
-

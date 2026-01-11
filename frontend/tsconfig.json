@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/circle/Circle.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/circle/Circle.jsx", "src/app/components/Easy/AkshaySidebar/AkshaySidebar.tsx", "src/app/components/Easy/PasswordStrength/PasswordStrength.jsx", "src/app/components/infinite-scroll/page.tsx", "src/app/components/infinite-scroll/component/InfiniteScroll.tsx"],
   "exclude": ["node_modules"]
 }

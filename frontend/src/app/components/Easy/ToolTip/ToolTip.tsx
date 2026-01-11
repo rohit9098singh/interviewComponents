@@ -8,7 +8,7 @@ const ToolTip = () => {
       { emoji: '⚙️', label: 'Settings' }
     ];
 
-     const [hoveredIcon, setHoveredIcon] = useState(null);
+     const [hoveredIcon, setHoveredIcon] = useState("");
   return (
     <div className='min-h-screen flex justify-center items-center'>
        <div className='flex gap-8'>
@@ -17,7 +17,7 @@ const ToolTip = () => {
             key={icon.label}
             className='flex flex-col items-center relative'
             onMouseEnter={() => setHoveredIcon(icon.label)}
-            onMouseLeave={() => setHoveredIcon(null)}
+            onMouseLeave={() => setHoveredIcon("")}
           >
             {hoveredIcon === icon.label && (
               <span className='absolute -top-6 bg-black text-white text-sm px-2 py-1 rounded'>

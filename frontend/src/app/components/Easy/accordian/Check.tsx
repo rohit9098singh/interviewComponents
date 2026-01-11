@@ -4,8 +4,8 @@ import { items } from '../accordian/Accordian'
 import { ChevronDown } from 'lucide-react'
 
 type accordianProps = {
-    title: string,
-    content: string
+  title: string,
+  content: string
 }
 
 const Check = () => {
@@ -43,3 +43,6 @@ const Check = () => {
 }
 
 export default Check
+
+
+
