@@ -1,8 +1,14 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 
+type productProps={
+  id:string,
+  thumbnail:string,
+  image:string,
+  title:string
+}
 const Pagination = () => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState<productProps[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +33,7 @@ const Pagination = () => {
   const productPerPage = 10;
   const totalPages = Math.ceil(totalProduct / productPerPage);
 
-  const handlePageClick = (pageClick) => {
+  const handlePageClick = (pageClick:number) => {
     setCurrentPage(pageClick);
   };
 
@@ -50,6 +56,7 @@ const Pagination = () => {
     );
   };
 
+  
   return loading ? (
     <Loading />
   ) : (
@@ -105,5 +112,9 @@ const Pagination = () => {
   );
 };
 export default Pagination;
+
+
+
+
 
 

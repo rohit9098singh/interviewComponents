@@ -101,7 +101,7 @@ export default function Home() {
       {/* <Timer/> */}
       {/* <UserRef/> */}
       {/* <From/> */}
-      <Employee/>
+      {/* <Employee/> */}
       {/* <Table/> */}
       {/* <Question26/> */}
       {/* <ModalQuestion/> */}
@@ -111,7 +111,7 @@ export default function Home() {
       {/* <Parent/> */}
       {/* <Debounce/> */}
       {/* <Project/> */}
-      {/* <Scoll/> */}
+      <Scoll/>
     </div>
   );
 }

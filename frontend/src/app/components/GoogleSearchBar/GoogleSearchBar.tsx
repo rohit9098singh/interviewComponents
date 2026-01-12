@@ -7,11 +7,14 @@ type Recipe = {
     [key: string]: any;
 };
 
+type CacheProps = {
+  [key: string]: Recipe[];
+};
 const WithLocalStorage = () => {
     const [result, setResult] = useState<Recipe[]>([]);
     const [input, setInput] = useState("");
     const [showResult, setShowResult] = useState(false);
-    const [cache, setCache] = useState<{ [key: string]: Recipe[] }>({});
+    const [cache, setCache] = useState<CacheProps>({});
 
     const fetchApiData = async (query: string) => {
         if (cache[query]) {
@@ -29,7 +32,6 @@ const WithLocalStorage = () => {
             setCache((prev) => ({ ...prev, [query]: data.recipes }));
         }
     };
-
     useEffect(() => {
         const trimmedInput = input.trim();
 

@@ -24,6 +24,8 @@ type EmployeeForm = {
   imageFile: File | null;
 };
 
+
+
 const Employee = () => {
   const [data, setData] = useState<Employee[]>(employeeData);
   const [selectedProfile, setSelectedProfile] = useState<number | null>(null);
