@@ -3,38 +3,51 @@ import React, { useEffect, useRef, useState } from "react";
 
 const otpBoxes = 5;
 
-const Otp = () => {
-  const [inputArray, setInputArray] = useState(new Array(otpBoxes).fill(""));
-  const inputRef = useRef([]);
+const Otp: React.FC = () => {
+  // State: array of strings
+  const [inputArray, setInputArray] = useState<string[]>(
+    new Array(otpBoxes).fill("")
+  );
+
+  // Ref: array of input elements
+  const inputRef = useRef<Array<HTMLInputElement | null>>([]);
 
   useEffect(() => {
-    inputRef.current[0]?.focus(); 
+    inputRef.current[0]?.focus();
   }, []);
 
-  const handleChange = (value, index) => {
-    if(isNaN(value)) return ;
-    const newValue=value.trim().slice(-1);
+  // Change handler
+  const handleChange = (value: string, index: number): void => {
+    if (isNaN(Number(value))) return;
+
+    const newValue = value.trim().slice(-1);
     const newArr = [...inputArray];
-    // newArr[index] = newValue.slice(-1);
-    newArr[index]=newValue
+
+    newArr[index] = newValue;
     setInputArray(newArr);
-    newValue&&inputRef.current[index+1]?.focus();
+
+    if (newValue) {
+      inputRef.current[index + 1]?.focus();
+    }
   };
 
+  // Key handler
+  const handleKeyChange = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    if (e.key === "Backspace" && !inputArray[index]) {
+      inputRef.current[index - 1]?.focus();
+    }
 
-  const handleKeyChange=(e,index)=>{
-    console.log(e.key);
-    if(!e.target.value &&  e.key==="Backspace"){
-       inputRef.current[index-1]?.focus(); 
+    if (e.key === "ArrowLeft" && !inputArray[index]) {
+      inputRef.current[index - 1]?.focus();
     }
-    if(e.key==="ArrowLeft" && !e.target.value){
-        inputRef.current[index-1]?.focus();
-    }
-    if(e.key==="ArrowRight"  && !e.target.value){
-        inputRef.current[index-1]?.focus();
-    }
-  }
 
+    if (e.key === "ArrowRight" && !inputArray[index]) {
+      inputRef.current[index + 1]?.focus();
+    }
+  };
 
   return (
     <div className="flex justify-center mt-20">
@@ -42,18 +55,22 @@ const Otp = () => {
         <input
           key={index}
           type="text"
-          ref={(el) => (inputRef.current[index] = el)}
+          ref={(el: HTMLInputElement | null) => {
+            inputRef.current[index] = el;
+          }}
           className="m-1 rounded-md h-10 w-10 border border-black text-center"
-          value={inputArray[index]}
-          onChange={(e) => handleChange(e.target.value, index)}
-          onKeyDown={(e)=>handleKeyChange(e,index)}
+          value={input}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleChange(e.target.value, index)
+          }
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleKeyChange(e, index)
+          }
         />
+
       ))}
     </div>
   );
 };
 
-
-
 export default Otp;
-
