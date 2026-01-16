@@ -13,13 +13,8 @@ type ToastProps = {
 const ResusableToast = () => {
   const [toast, setToast] = useState<ToastProps | null>(null);
 
-  const showToast = (
-    message: string,
-    type: ToastType,
-    duration: number
-  ): void => {
+  const showToast = (message: string, type: ToastType, duration: number): void => {
     setToast({ message, type, duration });
-
     setTimeout(() => {
       setToast(null);
     }, duration);
