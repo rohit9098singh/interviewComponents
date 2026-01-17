@@ -1,17 +1,15 @@
-import { useRef, useCallback } from "react";
+"use client";
+import { useRef, useCallback, useState } from "react";
+import PostList from "./components/PostList";
 
+/* ------------------ Debounce Hook ------------------ */
 function useDebounce(fn, delay) {
   const timerRef = useRef(null);
 
   const debouncedFn = useCallback(
     (...args) => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-
-      timerRef.current = setTimeout(() => {
-        fn(...args);
-      }, delay);
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => fn(...args), delay);
     },
     [fn, delay]
   );
@@ -19,22 +17,31 @@ function useDebounce(fn, delay) {
   return debouncedFn;
 }
 
-
-
-
 const Debounce = () => {
-  let count = 0;
+  const [posts, setPosts] = useState([]);
+  const [query, setQuery] = useState("");
+  const countRef = useRef(0);
 
   const getData = async (e) => {
-    const query = e.target.value;
-    if (!query) return;
-    console.log(`API Call #${++count} with query: ${query}`);
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts?q=${query}`
-    );
+    const value = e.target.value;
 
-    const data = await response.json();
-    console.log("Response Data:", data);
+    if (!value) {
+      setPosts([]);
+      return;
+    }
+    
+    setQuery(value);
+
+    
+
+    console.log(`API Call #${++countRef.current} with query: ${value}`);
+
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts?q=${value}`
+    );
+    const data = await res.json();
+
+    setPosts(data);
   };
 
   const debouncedGetData = useDebounce(getData, 500);
@@ -44,10 +51,12 @@ const Debounce = () => {
       <input
         type="text"
         placeholder="Type here..."
-        onChange={(e) => debouncedGetData(e)}
+        onChange={debouncedGetData}
       />
+
+      <PostList posts={posts} query={query} />
     </div>
   );
-}
+};
 
-export default Debounce
+export default Debounce;

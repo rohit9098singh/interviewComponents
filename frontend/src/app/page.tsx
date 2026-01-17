@@ -56,6 +56,7 @@ import InfiniteScroll from "./components/infinite-scroll/component/InfiniteScrol
 import Scoll from "./components/infinite-scroll/page";
 import HtmlParser from "./components/htmlParser/page";
 import UTMTracker from "./components/utmTracker/UtmTracker";
+import MultiStepFormPage from "./components/multi_step_form/page";
 export default function Home() {
   return (
     <div className="">
@@ -116,6 +117,8 @@ export default function Home() {
       {/* <Scoll/> */}
       {/* <HtmlParser/> */}
       {/* <UTMTracker/>/ */}
+      {/* <TabsContainer/> */}
+      <MultiStepFormPage/>
     </div>
   );
 }
