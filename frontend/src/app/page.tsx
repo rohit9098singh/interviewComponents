@@ -54,6 +54,8 @@ import Check from "./components/Easy/accordian/Check";
 // import Form from "./components/Easy/ContactForm/Form";
 import InfiniteScroll from "./components/infinite-scroll/component/InfiniteScroll";
 import Scoll from "./components/infinite-scroll/page";
+import HtmlParser from "./components/htmlParser/page";
+import UTMTracker from "./components/utmTracker/UtmTracker";
 export default function Home() {
   return (
     <div className="">
@@ -111,7 +113,9 @@ export default function Home() {
       {/* <Parent/> */}
       {/* <Debounce/> */}
       {/* <Project/> */}
-      <Scoll/>
+      {/* <Scoll/> */}
+      {/* <HtmlParser/> */}
+      {/* <UTMTracker/>/ */}
     </div>
   );
 }
