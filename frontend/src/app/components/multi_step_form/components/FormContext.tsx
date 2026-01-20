@@ -1,4 +1,3 @@
-// components/multi-step-form/FormContext.tsx
 import { createContext, useContext } from "react";
 import { FormData } from "../config/types";
 
@@ -15,3 +14,7 @@ export const useFormContext = () => {
   if (!ctx) throw new Error("useFormContext outside provider");
   return ctx;
 };
+
+
+
+
