@@ -1,27 +1,20 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-
+import React, { useState } from 'react'
 import {
     PersonalInfo,
     professionalInfo,
     billingInfo,
-    personalInfoSchema,
-    professionalInfoSchema,
-    billingInfoSchema,
+    validatePersonalInfo,
+    validateProfessionalInfo,
+    validateBillingInfo,
 } from '../validation/schema'
 
 import { useMultistepForm } from '../hook/useMultistepForm'
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from '@/components/ui/dialog'
+import PersonalInfoStep from './PersonalInfoStep'
+import ProfessionalInfoStep from './ProfessionalInfoStep'
+import BillingInfoStep from './BillingInfoStep'
+import PreviewModal from './PreviewModal'
 
 type FormData = PersonalInfo & professionalInfo & billingInfo
 
@@ -30,31 +23,44 @@ const MultistepForm = () => {
         useMultistepForm(3)
 
     const [formData, setFormData] = useState<Partial<FormData>>({})
+    const [errors, setErrors] = useState<Record<string, string>>({})
     const [showPreviewModal, setShowPreviewModal] = useState(false)
 
-    const getCurrentSchema = () => {
-        if (currentStep === 0) return personalInfoSchema
-        if (currentStep === 1) return professionalInfoSchema
-        return billingInfoSchema
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target
+        setFormData(prev => ({ ...prev, [name]: value }))
+        
+        // Clear error for this field when user starts typing
+        if (errors[name]) {
+            setErrors(prev => {
+                const newErrors = { ...prev }
+                delete newErrors[name]
+                return newErrors
+            })
+        }
     }
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm<any>({
-        resolver: zodResolver(getCurrentSchema()),
-        mode: 'onChange',
-    })
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
 
-    useEffect(() => {
-        reset(formData)
-    }, [currentStep, formData, reset])
+        // Custom validation based on current step
+        let validationResult
+        if (currentStep === 0) {
+            validationResult = validatePersonalInfo(formData)
+        } else if (currentStep === 1) {
+            validationResult = validateProfessionalInfo(formData)
+        } else {
+            validationResult = validateBillingInfo(formData)
+        }
 
-    const onSubmit: SubmitHandler<any> = (data) => {
-        const updatedData = { ...formData, ...data }
-        setFormData(updatedData)
+        // If validation fails, set errors
+        if (!validationResult.isValid) {
+            setErrors(validationResult.errors)
+            return
+        }
+
+        // If validation passes, clear errors and continue
+        setErrors({})
 
         if (currentStep === 2) {
             // Open preview modal on last step
@@ -100,175 +106,15 @@ const MultistepForm = () => {
                 </div>
 
                 {/* FORM */}
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     {/* STEP 1 */}
-                    {currentStep === 0 && (
-                        <>
-                            <h2 className="text-xl font-bold mb-4">Personal Information</h2>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('firstName')} 
-                                    placeholder="First Name" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.firstName && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.firstName.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('lastName')} 
-                                    placeholder="Last Name" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.lastName && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.lastName.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('email')} 
-                                    placeholder="Email" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.email && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.email.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('phone')} 
-                                    placeholder="Phone" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.phone && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.phone.message)}
-                                    </p>
-                                )}
-                            </div>
-                        </>
-                    )}
+                    {currentStep === 0 && <PersonalInfoStep formData={formData} errors={errors} onChange={handleChange} />}
 
                     {/* STEP 2 */}
-                    {currentStep === 1 && (
-                        <>
-                            <h2 className="text-xl font-bold mb-4">Professional Information</h2>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('company')} 
-                                    placeholder="Company" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.company && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.company.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('position')} 
-                                    placeholder="Position" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.position && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.position.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <select 
-                                    {...register('experience')} 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                >
-                                    <option value="">Experience</option>
-                                    <option value="0-2">0-2</option>
-                                    <option value="3-5">3-5</option>
-                                    <option value="6-10">6-10</option>
-                                    <option value="10+">10+</option>
-                                </select>
-                                {errors.experience && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.experience.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('industry')} 
-                                    placeholder="Industry" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.industry && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.industry.message)}
-                                    </p>
-                                )}
-                            </div>
-                        </>
-                    )}
+                    {currentStep === 1 && <ProfessionalInfoStep formData={formData} errors={errors} onChange={handleChange} />}
 
                     {/* STEP 3 */}
-                    {currentStep === 2 && (
-                        <>
-                            <h2 className="text-xl font-bold mb-4">Billing Information</h2>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('cardNumber')} 
-                                    placeholder="Card Number" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.cardNumber && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.cardNumber.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('expiryDate')} 
-                                    placeholder="MM/YY" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.expiryDate && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.expiryDate.message)}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <input 
-                                    {...register('cvv')} 
-                                    placeholder="CVV" 
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                />
-                                {errors.cvv && (
-                                    <p className="text-red-500 text-sm mt-1">
-                                        {String(errors.cvv.message)}
-                                    </p>
-                                )}
-                            </div>
-                        </>
-                    )}
+                    {currentStep === 2 && <BillingInfoStep formData={formData} errors={errors} onChange={handleChange} />}
 
                     {/* NAVIGATION */}
                     <div className="flex justify-between pt-6">
@@ -291,104 +137,12 @@ const MultistepForm = () => {
                 </form>
 
                 {/* PREVIEW MODAL */}
-                <Dialog open={showPreviewModal} onOpenChange={setShowPreviewModal}>
-                    <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-                        <DialogHeader>
-                            <DialogTitle className="text-2xl text-indigo-600">Review Your Information</DialogTitle>
-                            <DialogDescription>
-                                Please review all information carefully before submitting.
-                            </DialogDescription>
-                        </DialogHeader>
-
-                        <div className="space-y-6 py-4">
-                            {/* Personal Information */}
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                                <h3 className="font-semibold text-lg mb-3 text-gray-700">Personal Information</h3>
-                                <div className="grid grid-cols-2 gap-4 text-sm">
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">First Name:</span>
-                                        <p className="font-medium">{formData.firstName || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Last Name:</span>
-                                        <p className="font-medium">{formData.lastName || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Email:</span>
-                                        <p className="font-medium">{formData.email || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Phone:</span>
-                                        <p className="font-medium">{formData.phone || 'N/A'}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Professional Information */}
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                                <h3 className="font-semibold text-lg mb-3 text-gray-700">Professional Information</h3>
-                                <div className="grid grid-cols-2 gap-4 text-sm">
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Company:</span>
-                                        <p className="font-medium">{formData.company || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Position:</span>
-                                        <p className="font-medium">{formData.position || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Experience:</span>
-                                        <p className="font-medium">{formData.experience || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Industry:</span>
-                                        <p className="font-medium">{formData.industry || 'N/A'}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Billing Information */}
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                                <h3 className="font-semibold text-lg mb-3 text-gray-700">Billing Information</h3>
-                                <div className="grid grid-cols-2 gap-4 text-sm">
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Card Number:</span>
-                                        <p className="font-medium">
-                                            {formData.cardNumber 
-                                                ? `**** **** **** ${formData.cardNumber.slice(-4)}` 
-                                                : 'N/A'}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">Expiry Date:</span>
-                                        <p className="font-medium">{formData.expiryDate || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-500 block mb-1">CVV:</span>
-                                        <p className="font-medium">***</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <DialogFooter>
-                            <button
-                                type="button"
-                                onClick={() => setShowPreviewModal(false)}
-                                className="px-6 py-2 bg-gray-200 rounded hover:bg-gray-300 transition"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                type="button"
-                                onClick={handleFinalSubmit}
-                                className="px-6 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
-                            >
-                                Submit
-                            </button>
-                        </DialogFooter>
-                    </DialogContent>
-                </Dialog>
+                <PreviewModal
+                    open={showPreviewModal}
+                    onOpenChange={setShowPreviewModal}
+                    formData={formData}
+                    onSubmit={handleFinalSubmit}
+                />
             </div>
         </div>
     )

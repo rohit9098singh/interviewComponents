@@ -11,12 +11,6 @@ export const useMultistepForm = (totalSteps: number) => {
     setCurrentStep((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const goToStep = (step: number) => {
-    if (step >= 0 && step < totalSteps) {
-      setCurrentStep(step);
-    }
-  };
-
   const isFirstStep = currentStep === 0;
   const isLastStep = currentStep === totalSteps - 1;
 
@@ -24,7 +18,6 @@ export const useMultistepForm = (totalSteps: number) => {
     currentStep,
     next,
     back,
-    goToStep,
     isFirstStep,
     isLastStep,
   };
